@@ -44,10 +44,11 @@ button {
   background-color: #1a1a1a;
   cursor: pointer;
   transition: border-color 0.25s;
+  color: red;
 }
 
 button:hover {
-  border-color: #646cff;
+  border-color: red;
 }
 
 button:focus,
@@ -65,12 +66,18 @@ button:focus-visible {
   justify-content: center;
 }
 
+table {
+  padding: 15rem 0;
 
-tr {
-  td {
-    border-bottom: 1px solid #535bf2;
+
+  tr {
+
+    td {
+      border-bottom: 1px solid #535bf2;
+    }
   }
 }
+
 
 
 

@@ -15,26 +15,44 @@ function App() {
 
     return (
       Object.keys(post).map((key, index) => (
-        key === "content" ? null :
+        key === "content" ? null : index === 0 ?
+
+          <td key={`col-${index}`}>
+            <button onClick={() => deleteHandler(post.slug)}>X</button>
+            <span>{post[key]}</span>
+          </td>
+          :
           <td key={`col-${index}`}>
             <span>{post[key]}</span>
           </td>
-      ))
-    )
+      )))
   }
 
+  function deleteHandler(post_slug) {
+    fetch(`http://localhost:3000/posts/${post_slug}`, {
+      method: 'DELETE'
+    })
 
+      .then(res => {
+        console.log(res)
+        res.json()
+      }
 
+      )
+      .then(data => console.log(`post deleted! ${data}`))
+  }
 
   return (
     <table>
-      {
-        posts.map((post, index) => (
-          <tr key={`row-${index}`}>
-            {colHandler(post)}
-          </tr>
-        ))
-      }
+      <tbody>
+        {
+          posts.map((post, index) => (
+            <tr key={`row-${index}`}>
+              {colHandler(post)}
+            </tr>
+          ))
+        }
+      </tbody>
     </table>
   )
 
