@@ -18,7 +18,7 @@ function App() {
         key === "content" ? null : index === 0 ?
 
           <td key={`col-${index}`}>
-            <button onClick={() => deleteHandler(post.slug)}>X</button>
+            <button onClick={() => deleteHandler(post.slug, index)}>X</button>
             <span>{post[key]}</span>
           </td>
           :
@@ -28,7 +28,7 @@ function App() {
       )))
   }
 
-  function deleteHandler(post_slug) {
+  function deleteHandler(post_slug, index) {
     fetch(`http://localhost:3000/posts/${post_slug}`, {
       method: 'DELETE'
     })
@@ -39,7 +39,18 @@ function App() {
       }
 
       )
-      .then(data => console.log(`post deleted! ${data}`))
+      .then(data => console.log(`post ${index}deleted!`))
+
+    //const newPosts = [...posts].splice(index, 1)
+    const newPosts = [...posts]
+    const finalNewPosts = newPosts.filter((post) => post !== posts[index])
+    console.log(`index is ${index}`)
+
+    console.log(`posts is`)
+    console.log(newPosts)
+    console.log(`filtered posts without the deleted element is `)
+    console.log(finalNewPosts)
+    setPosts(finalNewPosts)
   }
 
   return (
