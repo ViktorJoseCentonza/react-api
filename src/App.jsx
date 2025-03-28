@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react'
-import './App.css'
 
 function App() {
   const [posts, setPosts] = useState([])
@@ -12,18 +11,32 @@ function App() {
       ))
   }, [])
 
-  return (
-    <>
-      {posts.map((post) => (
-        <div key={`post-${post.slug}`}>
-          <img src={`http://localhost:3000/imgs/${post.image}`} alt={post.title} />
-          <h1>{post.title}</h1>
-          <p>{post.content}</p>
-        </div>
-      ))
-      }
-    </>
-  )
-}
+  function colHandler(post) {
 
+    return (
+      Object.keys(post).map((key, index) => (
+        key === "content" ? null :
+          <td key={`col-${index}`}>
+            <span>{post[key]}</span>
+          </td>
+      ))
+    )
+  }
+
+
+
+
+  return (
+    <table>
+      {
+        posts.map((post, index) => (
+          <tr key={`row-${index}`}>
+            {colHandler(post)}
+          </tr>
+        ))
+      }
+    </table>
+  )
+
+}
 export default App
